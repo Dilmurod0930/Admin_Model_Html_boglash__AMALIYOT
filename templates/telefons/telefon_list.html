@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <title>Telefonlar ro‘yxati</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .telefon-card {
+            border-radius: 15px;
+            transition: transform 0.2s ease;
+        }
+        .telefon-card:hover {
+            transform: scale(1.02);
+        }
+        .telefon-img {
+            height: 250px;
+            object-fit: cover;
+            border-radius: 15px 15px 0 0;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="#">📱 Telefonlar.uz</a>
+    </div>
+</nav>
+
+<!-- Main content -->
+<div class="container py-5">
+    <h2 class="text-center mb-5">📋 Telefonlar ro‘yxati</h2>
+
+    <div class="row">
+        {% for telefon in telefons %}
+        <div class="col-md-4 mb-4">
+            <div class="card telefon-card shadow h-100">
+                {% if telefon.image %}
+                    <img src="{{ telefon.image.url }}" class="telefon-img card-img-top" alt="{{ telefon.name }}">
+                {% else %}
+                    <img src="https://via.placeholder.com/300x250?text=No+Image" class="telefon-img card-img-top" alt="No image">
+                {% endif %}
+                <div class="card-body d-flex flex-column">
+                    <h5 class="card-title">{{ telefon.company }} {{ telefon.name }}</h5>
+                    <p class="card-text">
+                        💵 <strong>{{ telefon.price }} so‘m</strong><br>
+                        🎨 {{ telefon.color }} | 💾 {{ telefon.storage }} GB | 🧠 {{ telefon.ram }} GB
+                    </p>
+                    <a href="{% url 'telefon_info' telefon.id %}" class="btn btn-primary mt-auto">Batafsil ko‘rish</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+
+        {% if telefonlar|length == 0 %}
+        <div class="col-12 text-center text-muted">
+            <p>Hozircha telefonlar mavjud emas.</p>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+<!-- Footer -->
+<footer class="bg-dark text-white text-center py-3">
+    <p class="mb-0">© 2025 Telefonlar.uz</p>
+</footer>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

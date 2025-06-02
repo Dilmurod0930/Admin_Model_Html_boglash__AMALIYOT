@@ -8,9 +8,9 @@ def home(request):
 def telefon_list(request):
     telefons = Telefon.objects.all()
     context = {'telefons': telefons}
-    return render(request, 'telefonlar/telefon_list.html',  context= context)
+    return render(request, 'telefons/telefon_list.html',  context= context)
 
 def  telefon_info(request,  pk):
-    tele =Telefon.objects.get(id=pk)
-    context = {'tele': tele}
+    telefons =Telefon.objects.get(id=pk)
+    context = {'telefons': telefons}
     return render(request, 'telefonlar/telefon_info.html', context = context)
